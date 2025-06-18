@@ -11,22 +11,24 @@ typedef struct {
 int main() {
 
     int n;
-    printf("Quantas acoes");
+    printf("Quantas acoes: ");
     scanf("%d", &n);
 
     acao *array = malloc(n*sizeof(acao));
 
     for(int i = 0; i < n; i++){
-        printf("nome:");
+        printf("nome: ");
         scanf("%s", array[i].nome);
-         printf("custo:");
-        scanf("%s", array[i].custo);
-         printf("retorno:");
-        scanf("%s", array[i].retorno);
+         printf("custo: ");
+        scanf("%f", &array[i].custo);
+         printf("retorno: ");
+        scanf("%f", &array[i].retorno);
     }
-    printf("==== Acoes ====");
+    printf("========================== Acoes ==========================\n");
+    printf("%-20s | %-10s | %-10s\n", "Nome", "Custo", "Retorno");
     for(int i = 0; i< n; i++){
-        printf(" Nome: %s | custo: %.2f | Rotorno: %.2f%%", array[i].nome, array[i].custo, array[i].retorno);
+        printf("%-20s | %9.2f | Retorno: %10.2f%%\n", array[i].nome, array[i].custo, array[i].retorno);
     }
+    free(array);
     return 0;
 }
