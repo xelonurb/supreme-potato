@@ -22,8 +22,10 @@ int main() {
         scanf("%s", array[i].custo);
          printf("retorno:");
         scanf("%s", array[i].retorno);
-    
-
+    }
+    printf("==== Acoes ====");
+    for(int i = 0; i< n; i++){
+        printf(" Nome: %s | custo: %.2f | Rotorno: %.2f%%", array[i].nome, array[i].custo, array[i].retorno);
     }
     return 0;
 }
