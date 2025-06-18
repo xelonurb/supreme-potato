@@ -25,9 +25,10 @@ int main() {
         scanf("%f", &array[i].retorno);
     }
     printf("========================== Acoes ==========================\n");
+    printf("-----------------------------------------------------------\n");
     printf("%-20s | %-10s | %-10s\n", "Nome", "Custo", "Retorno");
     for(int i = 0; i< n; i++){
-        printf("%-20s | %10.2f | Retorno: %10.2f%%\n", array[i].nome, array[i].custo, array[i].retorno);
+        printf("%-20s | %10.2f | Retorno: %9.2f%%\n", array[i].nome, array[i].custo, array[i].retorno);
     }
     free(array);
     return 0;
