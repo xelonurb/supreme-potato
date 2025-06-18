@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct {
@@ -13,7 +14,7 @@ int main() {
     printf("Quantas acoes");
     scanf("%d", &n);
 
-    acao array[n];
+    acao *array = malloc(n*sizeof(acao));
 
     for(int i = 0; i < n; i++){
         printf("nome:");
