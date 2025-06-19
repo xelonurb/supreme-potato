@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 typedef struct {
     char nome[10];
@@ -10,7 +9,7 @@ typedef struct {
 } acao;
 
 int investimento (acao *array, int n, float capital, float *melhorCusto, float *maiorRetorno){
-    int  totalcomb = pow(2, n);
+    int totalcomb = 1 << n;;
     int melhorcomb;
     *melhorCusto = 0;
     *maiorRetorno = -1;
@@ -36,14 +35,35 @@ int investimento (acao *array, int n, float capital, float *melhorCusto, float *
     return melhorcomb;
 }
 
+void exibirResultado(acao *array, int n, float capital, int melhorcomb, float melhorCusto, float maiorRetorno ){
+
+    printf("\n----------------------------------------\n");
+    printf("Carteira de Investimentos Otimizada\n");
+    printf("----------------------------------------\n");
+    printf("Capital Disponível: R$ %.2f\n\n", capital);
+    printf("Ações a Comprar:\n");
+
+    for(int j = 0; j < n; j++){
+        if(melhorcomb & (1<< j)){
+            printf("- %s (Custo: R$ %.2f, Retorno: %.2f%%)\n", array[j].nome, array[j].custo, array[j].retorno);
+
+        }
+    }
+    printf("\nResumo da Carteira:\n");
+    printf("- Custo Total: R$ %.2f\n", melhorCusto);
+    printf("- Retorno Máximo Esperado: %.2f%%\n", maiorRetorno);
+    printf("----------------------------------------\n");
+
+
+}
 int main() {
 
     int n;
     float capital;
     printf("Quantas acoes: ");
     scanf("%d", &n);
-    printf("Qual o capital inicial");
-    scanf("%d", &capital);
+    printf("Qual o capital inicial: ");
+    scanf("%f", &capital);
 
     acao *array = malloc(n*sizeof(acao));
 
@@ -61,6 +81,11 @@ int main() {
     for(int i = 0; i< n; i++){
         printf("%-20s | %10.2f | Retorno: %9.2f%%\n", array[i].nome, array[i].custo, array[i].retorno);
     }
+
+    float melhorCusto, maiorRetorno;
+    int melhorcomb = investimento(array, n, capital, &melhorCusto, &maiorRetorno);
+    exibirResultado(array, n, capital, melhorcomb, melhorCusto, maiorRetorno);
+
     free(array);
     return 0;
 }
