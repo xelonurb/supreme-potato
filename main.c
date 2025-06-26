@@ -4,11 +4,11 @@
 
 typedef struct {
     char nome[30];
-    int custo;      // custo em reais inteiros
+    int custo;     
     float retorno;
 } acao;
 
-// função método máscara de bit (muito lenta para muitos itens)
+// metodo mascara de bits (muito lento, remover depois)
 int investimento (acao *array, int n, int capital, int *melhorCusto, float *maiorRetorno){
     int totalcomb = 1 << n;
     int melhorcomb = 0;
@@ -80,7 +80,6 @@ acao *lerArquivo(const char *nomeArquivo, int *n, int *capital){
     int capacidade = 50;
     acao *array = malloc(capacidade * sizeof(acao));
 
-    // Ler capital
     while (fgets(linha, sizeof(linha), file)){
         if(strncmp(linha, "CAPITAL_DISPONIVEL_R$:", strlen("CAPITAL_DISPONIVEL_R$:")) == 0){
             float temp;
@@ -89,7 +88,6 @@ acao *lerArquivo(const char *nomeArquivo, int *n, int *capital){
             break;
         }
     }
-    // Ler até encontrar "ACOES:"
     while (fgets(linha, sizeof(linha), file)){
         if (strncmp(linha, "ACOES:", 6) == 0){
             break;
@@ -99,14 +97,12 @@ acao *lerArquivo(const char *nomeArquivo, int *n, int *capital){
     int custoint;
     float retornofloat;
 
-    // Ler ações
     while (fgets(linha, sizeof(linha), file)){
         if(sscanf(linha, "%s %d %f %[^\n]", id, &custoint, &retornofloat, nomeTemp) == 4){
             if(*n >= capacidade){
                 capacidade *= 2;
                 array = realloc(array, capacidade * sizeof(acao));
             }
-            // Copia segura do nome da ação
             strncpy(array[*n].nome, nomeTemp, sizeof(array[*n].nome) - 1);
             array[*n].nome[sizeof(array[*n].nome) - 1] = '\0';  // garante terminação nula
             array[*n].custo = custoint;
