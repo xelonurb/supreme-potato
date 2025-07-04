@@ -88,7 +88,7 @@ acao *lerArquivo(const char *nomeArquivo, int *n, int *capital){
         if(strncmp(linha, "CAPITAL_DISPONIVEL_R$:", strlen("CAPITAL_DISPONIVEL_R$:")) == 0){
             float temp;
             sscanf(linha, "CAPITAL_DISPONIVEL_R$: %f", &temp);
-            *capital = (int)(temp + 0.5);  // capital em reais inteiros
+            *capital = (int)(temp + 0.5);
             break;
         }
     }
@@ -108,7 +108,7 @@ acao *lerArquivo(const char *nomeArquivo, int *n, int *capital){
                 array = realloc(array, capacidade * sizeof(acao));
             }
             strncpy(array[*n].nome, nomeTemp, sizeof(array[*n].nome) - 1);
-            array[*n].nome[sizeof(array[*n].nome) - 1] = '\0';  // garante terminação nula
+            array[*n].nome[sizeof(array[*n].nome) - 1] = '\0';  
             array[*n].custo = custoint;
             array[*n].retorno = retornofloat;
             (*n)++;
