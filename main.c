@@ -34,7 +34,13 @@ int investimento (acao *array, int n, int capital, int *melhorCusto, float *maio
     return melhorcomb;
 }
 
-// mochila dinâmica (programação dinâmica)
+void liberarmemoria(float **dp, int i, int n){
+    if (i > n) return;
+    liberarmemoria(dp, i + 1, n);
+        free(dp[i]);
+    
+}
+// knapsack problem (programação dinâmica)
 float mochilaknapsack(acao *array, int n, int capital, int *selecionadas){
     float **dp = malloc((n + 1) * sizeof(float *));
     for(int i = 0; i <= n; i++){
@@ -62,9 +68,7 @@ float mochilaknapsack(acao *array, int n, int capital, int *selecionadas){
         }
     }
     float resultado = dp[n][capital];
-    for(int i = 0; i <= n; i++){
-        free(dp[i]);
-    }
+    liberarmemoria(dp, 0, n);
     free(dp);
     return resultado;
 }
